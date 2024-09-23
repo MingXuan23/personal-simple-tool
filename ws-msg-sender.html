@@ -114,11 +114,12 @@
             <label id="languageLabel">Select Language:</label>
             <div>
                 <label>
-                    <input type="checkbox" name="language" value="华文" checked> 中文
+                    <input type="checkbox" name="language" value="English" checked> English
                 </label>
                 <label>
-                    <input type="checkbox" name="language" value="English"> English
+                    <input type="checkbox" name="language" value="华文" > 中文
                 </label>
+               
                 
                 <label>
                     <input type="checkbox" name="language" value="Bahasa Malaysia"> Bahasa Malaysia
@@ -155,18 +156,32 @@
             }
 
             var message = ``;
-            selectedLanguages.forEach(function(language) {
-                 if (language === "English") {
-                    message += `Hello ${receiverName},\n${logistic} is delivering ${cartonNum} cartons from ${companyName} to ${address}, and they are expected to arrive in ${estimateTime} minute(s).\nYour items will be left at your doorstep. If you have any other delivery instructions for our partner, please reply to this message and let us know.\nThank you, and have a wonderful day!`;
-                }
-                else if (language === "华文") {
-                    message += ` 你好 ${receiverName},\n${logistic} 正在尝试运输 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。\n您的物品将放在您的家门口。如果您有其他交付指示给我们的司机，请回复此消息告知我们。\n谢谢配合！`;
-                }
-                else if (language === "Bahasa Malaysia") {
-                    message += ` Salam ${receiverName},\n${logistic} sedang menghantar ${cartonNum} kotak dari ${companyName} ke ${address}, dan dijadualkan tiba dalam ${estimateTime} minit.\nBarangan anda akan diletakkan di depan pintu anda. Jika anda mempunyai arahan penghantaran lain untuk rakan kongsi kami, sila balas mesej ini dan beritahu kami.\nTerima kasih atas kerjasama anda\n\n`;
-                } 
-            });
+console.log(selectedLanguages);
+selectedLanguages.forEach(function(language) {
+if (language === "English") {
+    message += `Hello ${receiverName},
+${logistic} is delivering ${cartonNum} cartons from ${companyName} to ${address}, and they are expected to arrive in ${estimateTime} minute(s).
+Your items will be left at your doorstep. If you have any other delivery instructions for our partner, please reply to this message and let us know.
+Thank you, and have a wonderful day!
 
+`;
+  } else if (language === "华文") {
+    message += `你好 ${receiverName},
+${logistic} 正在尝试运输 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。
+您的物品将放在您的家门口。如果您有其他交付指示给我们的司机，请回复此消息告知我们。
+谢谢配合！
+
+`;
+  }
+  else if (language === "Bahasa Malaysia") {
+    message += `Salam ${receiverName},
+${logistic} sedang menghantar ${cartonNum} kotak dari ${companyName} ke ${address}, dan dijadualkan tiba dalam ${estimateTime} minit.
+Barangan anda akan diletakkan di depan pintu anda. Jika anda mempunyai arahan penghantaran lain untuk rakan kongsi kami, sila balas mesej ini dan beritahu kami.
+Terima kasih atas kerjasama anda.
+
+`;
+  }
+});
             // WhatsApp URL format
             var whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(message.replace(/\n/g, '%0A'))}`;
 
