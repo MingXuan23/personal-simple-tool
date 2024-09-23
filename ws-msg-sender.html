@@ -156,32 +156,20 @@
             }
 
             var message = ``;
-console.log(selectedLanguages);
-selectedLanguages.forEach(function(language) {
-if (language === "English") {
-    message += `Hello ${receiverName},
-${logistic} is delivering ${cartonNum} cartons from ${companyName} to ${address}, and they are expected to arrive in ${estimateTime} minute(s).
-Your items will be left at your doorstep. If you have any other delivery instructions for our partner, please reply to this message and let us know.
-Thank you, and have a wonderful day!
 
-`;
-  } else if (language === "华文") {
-    message += `你好 ${receiverName},
-${logistic} 正在尝试运输 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。
-您的物品将放在您的家门口。如果您有其他交付指示给我们的司机，请回复此消息告知我们。
-谢谢配合！
+            function whatsappNewline() {
+            return '  \n';
+            }
 
-`;
-  }
-  else if (language === "Bahasa Malaysia") {
-    message += `Salam ${receiverName},
-${logistic} sedang menghantar ${cartonNum} kotak dari ${companyName} ke ${address}, dan dijadualkan tiba dalam ${estimateTime} minit.
-Barangan anda akan diletakkan di depan pintu anda. Jika anda mempunyai arahan penghantaran lain untuk rakan kongsi kami, sila balas mesej ini dan beritahu kami.
-Terima kasih atas kerjasama anda.
-
-`;
-  }
-});
+            selectedLanguages.forEach(function(language) {
+            if (language === "Bahasa Malaysia") {
+                message += `Salam ${receiverName},${whatsappNewline()}${logistic} sedang menghantar ${cartonNum} kotak dari ${companyName} ke ${address}, dan dijadualkan tiba dalam ${estimateTime} minit.${whatsappNewline()}Barangan anda akan diletakkan di depan pintu anda. Jika anda mempunyai arahan penghantaran lain untuk rakan kongsi kami, sila balas mesej ini dan beritahu kami.${whatsappNewline()}Terima kasih atas kerjasama anda${whatsappNewline()}${whatsappNewline()}`;
+            } else if (language === "English") {
+                message += `Hello ${receiverName},${whatsappNewline()}${logistic} is delivering ${cartonNum} cartons from ${companyName} to ${address}, and they are expected to arrive in ${estimateTime} minute(s).${whatsappNewline()}Your items will be left at your doorstep. If you have any other delivery instructions for our partner, please reply to this message and let us know.${whatsappNewline()}Thank you, and have a wonderful day!${whatsappNewline()}${whatsappNewline()}`;
+            } else if (language === "华文") {
+                message += `你好 ${receiverName},${whatsappNewline()}${logistic} 正在尝试运输 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。${whatsappNewline()}您的物品将放在您的家门口。如果您有其他交付指示给我们的司机，请回复此消息告知我们。${whatsappNewline()}谢谢配合！${whatsappNewline()}${whatsappNewline()}`;
+            }
+            });
             // WhatsApp URL format
             var whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(message.replace(/\n/g, '%0A'))}`;
 
