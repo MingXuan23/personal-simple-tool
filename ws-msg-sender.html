@@ -171,7 +171,7 @@
             }
             });
             // WhatsApp URL format
-            var whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(message.replace(/\n/g, '%0A'))}`;
+            var whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNum}&text=${encodeURIComponent(message)}`;
 
             // Redirect to WhatsApp
             window.open(whatsappUrl, '_blank');
