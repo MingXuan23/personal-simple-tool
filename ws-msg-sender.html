@@ -111,6 +111,9 @@
             <label id="estimateTimeLabel" for="estimateTime">Estimated Delivery Time (min):</label>
             <input type="number" id="estimateTime" required min="1" value="5">
 
+            <label id="codLable" for="codLable">Amount C.O.D:</label>
+            <input type="number" id="codAmount" min="0.00" required value="0.00" step="0.01">
+
             <label id="languageLabel">Select Language:</label>
             <div>
                 <label>
@@ -145,6 +148,7 @@
             var cartonNum = $('#cartonNum').val();
             var companyName = $('#companyName').val();
             var estimateTime = $('#estimateTime').val();
+            var codAmount = parseFloat($('#codAmount').val()) || 0;;
             var selectedLanguages = $('input[name="language"]:checked').map(function() {
                 return this.value;
             }).get();
@@ -165,7 +169,9 @@ selectedLanguages.forEach(function(language) {
 
 ${logistic} sedang menghantar ${cartonNum} kotak dari ${companyName} ke ${address}, dan dijadualkan tiba dalam ${estimateTime} minit. Sila bersedia untuk menerima barang anda.
 
-Jika anda mempunyai arahan penghantaran lain untuk rakan kongsi kami, sila balas mesej ini dan beritahu kami.
+Caj Penghantaran: RM ${codAmount.toFixed(2)}
+
+Jika anda mempunyai arahan penghantaran lain, sila balas mesej ini.
 Terima kasih atas kerjasama anda
 
 
@@ -175,7 +181,9 @@ Terima kasih atas kerjasama anda
 
 ${logistic} is delivering ${cartonNum} cartons from ${companyName} to ${address}, and they are expected to arrive in ${estimateTime} minutes. Please ready for receiving.
 
-If you have any other delivery instructions for our partner, please reply to this message and let us know.
+Amount COD: RM ${codAmount.toFixed(2)}
+
+If you have any other delivery instructions, please reply to this message.
 Thank you, and have a wonderful day!
 
 
@@ -183,10 +191,11 @@ Thank you, and have a wonderful day!
     } else if (language === "华文") {
         message += `你好 ${receiverName},
 
-${logistic} 正在尝试运输 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。请准备好接收。
+${logistic} 正在尝试运送 ${cartonNum} 件 ${companyName} 的箱子至 ${address}，预计将在 ${estimateTime} 分钟内送达。请提前做好接收准备。
 
-如果您有其他交付指示给我们的司机，请回复此消息告知我们。
-谢谢配合！
+到付金额: RM ${codAmount.toFixed(2)}
+
+如有其他交付指示，请回复此消息。感谢你的配合！
 
 
 `;
